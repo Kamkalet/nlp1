@@ -1,4 +1,5 @@
 import glob
+import time
 
 from elasticsearch.client import IndicesClient, Elasticsearch
 
@@ -59,6 +60,8 @@ for file_name in list_of_files:
         es.index(index=INDEX, doc_type=TYPE, id=file_name, body={
             "text": data,
         })
+
+time.sleep(5)
 
 print("Number of legislative acts containing the word ustawa (in any form):\t{}".format(
     es.search(index=INDEX, doc_type=TYPE, body={
